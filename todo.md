@@ -6,3 +6,13 @@
 
 ## Github links
 - [ ] Links to corresponding github repos
+- [ ] Links to 3D viewer
+
+## 3D Viewer
+- [ ] viewer page
+- [ ] Registry
+
+
+## Simulator
+- [ ] Other pages
+### Controllers
