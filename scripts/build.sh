@@ -118,17 +118,18 @@ for org_dir in ./render/*; do
                         first_dir=$(echo "$dir_no_project_path" | cut -d'/' -f1)
                         second_dir=$(echo "$dir_no_project_path" | awk -F'/' '{print $2}')
                         isNewSection=0 # false
+                        echo "$sectionName <=:::=> $first_dir"
                         if [ "$first_dir" != "$sectionName" ]; then 
                             isNewSection=1 # true
                             sectionName="$first_dir"
                             echo "<li> <a href=\"#sec-${first_dir}\" id=\"toc-${filename_no_extension}\" class=\"nav-link active\" data-scroll-target=\"#sec-${first_dir}\" >${first_dir}</a></li>" >> "$temp_file_for_links"  
-                            if [ index -gt 0 ]; then 
+                            if [ $index  -gt 0 ]; then 
                                 echo " </section>"  >> "$temp_file" 
                             fi
                             echo "<section id=\"sec-$first_dir\" class=\"level2\"><h2 class=\"anchored\" data-anchor-id=\"sec-$first_dir\"> $first_dir <a class=\"anchorjs-link\" aria-label=\"Anchor\" data-anchorjs-icon=\"\" href=\"#sec-$first_dir\" style=\"font: 1em / 1 anchorjs-icons; padding-left: 0.375em\" ></a> </h2>" >> "$temp_file" 
                             sectionIndex=$((sectionIndex + 1))
 
-                            if [ "$subSectionName" != "" ]; then 
+                            if [ "$subSectionName" != "" ]; then # New section starting and previous was subsection
                                 # close subsection
                                 echo " </section>"  >> "$temp_file"
                             fi
@@ -148,6 +149,7 @@ for org_dir in ./render/*; do
                             3)
                                 ## Has section 
                                 ## Has sub section
+                                echo "$subSectionName <==> $second_dir"
                                 if [ "$subSectionName" != "$second_dir" ]; then 
                                     subSectionName="$second_dir"
                                     echo "<section id=\"sec-$second_dir\" class=\"level3\"><h3 class=\"anchored\" data-anchor-id=\"sec-$second_dir\"> $second_dir <a class=\"anchorjs-link\" aria-label=\"Anchor\" data-anchorjs-icon=\"\" href=\"#sec-$second_dir\" style=\"font: 1em / 1 anchorjs-icons; padding-left: 0.375em\" ></a> </h3>" >> "$temp_file" 
